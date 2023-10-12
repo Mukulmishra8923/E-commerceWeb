@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block main-content %} 
+<h1>search result</h1>
+
+<div class=" container">
+     <div class="row mt-5">
+         <div class=" col-lg-12 " >
+
+             {% for fm in ser %}
+
+             <div class="card mb-2">
+               <div class="card-body">
+                 <div class="row">
+                   <div class="col-sm-8">
+                     
+                  <div class="fw-bold">{{fm.brand}}</div><br>
+                          {{fm.title}}<br>
+                      <div> Rs. {{fm.selling_price}}</div>
+                          {{fm.description}} <br>
+
+                         </div>
+                         <div class="col-sm-4">
+                            <img src="{{fm.product_image.url}}" width="150px" 
+                               height="150" alt="" class="img-fluid">
+                         </div>
+                     </div>
+ 
+                    </div>  
+              </div> 
+
+      <small class="text-danger">{{fm.errors|striptags}}</small>
+     <br>
+     {% endfor %}
+
+                    
+                  
+                
+        </div>  
+    </div>  
+</div>   
+        
+                             {% endblock main-content %}

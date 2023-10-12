@@ -1,0 +1,71 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container">
+ <div class="row mt-5">
+  <div class="col-sm-6">
+    <h4>Order Summary</h4>
+    {% for item in cart_items %}
+    <hr>
+      <div class="card mb-2">
+        <div class="card-body">
+          <div class="row">
+            
+            <div class="col-sm-8">
+          <h5>Product: {{item.product.title}}</h5>
+          <p>Quantity: {{item.product.quantity}}</p>
+
+         </div>
+         <div class="col-sm-4">
+          <p ><img src="{{item.product.product_image.url}}" class="img-fluid" 
+          height="150" width="150"    alt=""></p></div>
+          <p class="fw-bold">Price: {{item.product.discounted_price}}</p>
+         </div>
+         </div>
+      </div>
+      {% endfor %}
+   <p class="fw-bold">Total_price : Rs. {{totalamount}}</p>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <div class="col-sm-4 offset-sm-1">
+    <h4>Select Shipping Address</h4>
+    <hr>
+    <form action="/paymentdone">
+   
+      {% for ad in add %}
+      <div class="form-check mt-2 mb-2">
+        <input class="form-check-input" name="custid" type="radio" id="custadd{{forloop.counter
+        }}" value="{{ad.id}}">
+        <label class="form-check-label fw-bold" for="">
+          Address: {{forloop.counter}} </label>
+      </div>
+      <div class="card">
+        <div class="card-body">
+        <h5>{{ad.name}}</h5>
+        <p>{{ad.locality}} ,
+          <br>{{ad.city}}, {{ad.state}},<br> {{ad.zipcode}} </p>
+        </div>
+      </div>
+      <hr>
+        
+        {% endfor %}
+        <div class="text-end">
+          <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock main-content %}

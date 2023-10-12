@@ -1,0 +1,44 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Buy Now{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+ <div class="row">
+  <div class="col-sm-3">
+    <div class="list-group">
+        <a href="{% url 'mobile' %}" class="list-group-item list-group-item-action" aria-current="true">All Mobiles</a>
+        <a href="{% url 'mobiledata' 'Samsung' %}" class="list-group-item list-group-item-action" aria-current="true">Samsung</a>
+        <a href="{% url 'mobiledata' 'Xiaomi' %}" class="list-group-item list-group-item-action" aria-current="true">Xiaomi</a>
+        <a href="{% url 'mobiledata' 'Apple' %}" class="list-group-item list-group-item-action" aria-current="true">Apple</a>
+        <a href="{% url 'mobiledata' 'Tecno' %}" class="list-group-item list-group-item-action" aria-current="true">Tecno</a>
+        <a href="{% url 'mobiledata' 'realme' %}" class="list-group-item list-group-item-action" aria-current="true">realme</a>
+        <a href="{% url 'mobiledata' 'below' %}" class="list-group-item list-group-item-action" aria-current="true">Below Rs. 100000</a>
+        <a href="{% url 'mobiledata' 'above' %}" class="list-group-item list-group-item-action" aria-current="true">Above Rs. 100000</a>
+   
+  </div>
+</div>
+<div class="col-sm-8 offset-sm-1">
+    <div class="row">
+        {% for mob in mobiles %}
+        <div class="col-sm-4 text-center mb-4">
+            <a href="{% url 'product-detail'  mob.id %}" class="btn">
+                <div class="item">
+                   <img src="{{mob.product_image.url}}" height="200" alt="" 
+                    class=""> 
+                    <div class="fw-bold">{{mob.title}}</div>
+                    <div class="fw-bold">  Rs. {{mob.discounted_price}}
+                        <small class="fw-light text-decoration-line-through">{{mob.selling_price}}</small>
+                    </div>
+
+                </div>
+            </a>
+
+        </div>
+        {% endfor %}
+
+    </div>
+
+  
+ </div>
+</div>
+{% endblock main-content %}

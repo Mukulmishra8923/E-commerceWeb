@@ -1,0 +1,50 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block main-content %}
+<div class="container my-5">
+    <div class="row">
+     <h3>Welcome <span class="text-capitalize">{{request.user}}</span></h3>
+     <div class="col-sm-2 border-end">
+      <ul class="list-unstyled">
+       <li class="d-grid"><a href="{% url 'profile' %}" class="btn">Profile</a></li>
+       <li class="d-grid"><a href="{% url 'address' %}" class="btn">Address</a></li>
+       <li class="d-grid"><a href="{% url 'pic' %}" class="btn btn-primary">Profile pic</a></li>
+      </ul>
+     </div>
+    
+    <!-- <div class="col-sm-6"> -->
+ <div class="col-sm-5 offset-sm-1">
+    <form action="" method="POST" enctype="multipart/form-data">
+     {% csrf_token %}
+    
+     {% csrf_token %}
+ 
+     {% for fm in fm %}
+     <div class="form-group col-lg-6 mb-3 ">
+        <img src="{{fm.profile_pic.url}}" alt=" no img" class="img-fluid">
+     {{fm.label_tag}}  <small class="text-danger">{{fm.errors|striptags}}</small>
+     <br></div>
+     {% endfor %}
+     {% if messages %}
+     {% for message in messages %}
+     <p  {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}  >{{message}}</p>
+     {% endfor %}
+ {% endif %}  
+     
+     
+       <button type="submit" class="btn btn-primary">Submit</button>
+     </div>
+    </form>
+</div> 
+<!-- {% for fm in fm %}
+{{fm.dp_name}}
+<img src="{{fm.profile_pic.url}}" alt=" no img" class="img-fluid">
+</div>
+<br>
+{% endfor %} -->
+
+<!-- {{fmm}} -->
+<br>
+<br><br><br>
+{% endblock main-content %}
